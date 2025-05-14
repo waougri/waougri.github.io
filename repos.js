@@ -1,6 +1,3 @@
-import { Octokit } from "https://cdn.jsdelivr.net/npm/@octokit/rest@21.1.1/+esm";
-// fetch GitHub repos
-const octokit = new Octokit();
 async function fetchRepos() {
   try {
     const response = await fetch("https://pinned.berrysauce.dev/get/iustusae");
