@@ -4,8 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+  </style>
   <title>Ayman's Portfolio</title>
-
   <!-- Tailwind CSS + enable class-based dark mode -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -70,15 +72,22 @@
   <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" rel="stylesheet" />
 
   <!-- Fira Mono -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet" />
+  <!-- Montserrat for your name -->
+
+  <!-- Fira Code for the rest of the site -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
     body {
-      font-family: "Fira Mono", monospace;
-      transition:
-        background-color 0.3s,
-        color 0.3s;
+      font-family: 'Fira Code', monospace;
+      transition: background-color 0.3s, color 0.3s;
     }
+
+    .name {
+      font-family: 'Montserrat', sans-serif;
+    }
+
 
     .animate-fade-in {
       animation: fadeIn 1s ease-in-out;
@@ -94,7 +103,21 @@
         opacity: 1;
         transform: translateY(0);
       }
-    }
+
+
+
+
+    }.roboto-mono-name {
+       font-family: "SF Pro Display", monospace;
+       font-optical-sizing: auto;
+       font-style: normal;
+     }
+
+     .uop {
+       background-image: linear-gradient(white, rebeccapurple);
+       color: transparent;
+       background-clip: text;
+     }
   </style>
 </head>
 
@@ -119,8 +142,9 @@
 
   <!-- Header -->
   <header class="text-center py-12">
-    <h1 class="text-5xl md:text-7xl font-bold animate-fade-in">Ayman</h1>
-    <p class="mt-4 text-xl font-light animate-fade-in">
+    <h1
+            class="text-5xl md:text-7xl font-bold animate-fade-in roboto-mono-name">Ayman</h1>
+    <p class="mt-4 text-xl font-light animate-fade-in ">
       Aspiring Software Engineer
     </p>
   </header>
@@ -220,8 +244,9 @@
     <h2 class="text-3xl mb-6 border-b-2 inline-block border-jet dark:border-peach pb-1">
       Education
     </h2>
-    <p>B.Sc. in Computer Science, University of the People</p>
-    <p>Pasadena, CA – Expected 2025 (GPA: 3.54)</p>
+    <p>B.Sc. in Computer Science, <span class="uop">University of the People</span>
+    </p>
+    <p>Pasadena, CA – Expected 2025</p>
   </section>
 
   <!-- Contact -->
