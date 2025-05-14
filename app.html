@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sterlune Portfolio</title>
+
+  <!-- Tailwind CSS + enable class-based dark mode -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            peach: "#FFDDAB",
+            apricot: "#FFCA9C",
+            jet: "#363636",
+          },
+        },
+      },
+    };
+  </script>
+
+  <script>
+    // Move DOM manipulation to after content loads
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("theme-toggle");
+      const html = document.documentElement;
+      const iconMoon = document.getElementById("icon-moon");
+      const iconSun = document.getElementById("icon-sun");
+      const THEME_KEY = "theme";
+
+      // Helper: show/hide icons based on current mode
+      function updateIcon() {
+        if (html.classList.contains("dark")) {
+          iconMoon.classList.add("hidden");
+          iconSun.classList.remove("hidden");
+        } else {
+          iconSun.classList.add("hidden");
+          iconMoon.classList.remove("hidden");
+        }
+      }
+
+      // 1. Initialize from localStorage or OS preference:
+      const stored = localStorage.getItem(THEME_KEY);
+      if (
+        stored === "dark" ||
+        (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        html.classList.add("dark");
+      }
+      updateIcon();
+
+      // 2. Toggle on button click:
+      btn.addEventListener("click", () => {
+        html.classList.toggle("dark");
+        // persist
+        localStorage.setItem(
+          THEME_KEY,
+          html.classList.contains("dark") ? "dark" : "light"
+        );
+        updateIcon();
+      });
+    });
+  </script>
+
+  <!-- Devicon for tech icons -->
+  <link
+    href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Fira Mono -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: "Fira Mono", monospace;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-peach text-jet dark:bg-jet dark:text-peach">
+<!-- Dark mode toggle -->
+<div class="fixed top-4 right-4 z-50">
+  <button
+    id="theme-toggle"
+    class="p-2 rounded-full bg-white/50 dark:bg-black/50 hover:bg-white/75 dark:hover:bg-black/75 transition"
+    aria-label="Toggle theme"
+  >
+    <svg
+      id="icon-moon"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 text-jet"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+      />
+    </svg>
+    <svg
+      id="icon-sun"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 text-peach hidden"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+      />
+    </svg>
+  </button>
+</div>
+
+<!-- Header -->
+<header class="text-center py-12">
+  <h1 class="text-5xl md:text-7xl font-bold animate-fade-in">Sterlune</h1>
+  <p class="mt-4 text-xl font-light animate-fade-in">
+    Aspiring Software Engineer
+  </p>
+</header>
+
+<!-- Projects -->
+<section id="projects" class="px-6 md:px-24 py-12">
+  <h2
+    class="text-3xl mb-8 border-b-2 inline-block border-jet dark:border-peach pb-1"
+  >
+    Projects
+  </h2>
+  <div
+    id="repo-list"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+  ></div>
+</section>
+
+<!-- Skills -->
+<!-- Skills Section -->
+<section id="skills" class="px-6 md:px-24 py-12 bg-apricot dark:bg-jet/80">
+  <h2
+    class="text-3xl mb-8 border-b-2 inline-block border-jet dark:border-peach pb-1"
+  >
+    Skills
+  </h2>
+  <ul
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
+  >
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-cplusplus-plain text-4xl"></i>
+      <span>C++</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-c-plain text-4xl"></i>
+      <span>C</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-java-plain text-4xl"></i>
+      <span>Java</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-python-plain text-4xl"></i>
+      <span>Python</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-javascript-plain text-4xl"></i>
+      <span>JavaScript</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-nodejs-plain text-4xl"></i>
+      <span>Node.js</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-typescript-plain text-4xl"></i>
+      <span>TypeScript</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-angularjs-plain text-4xl"></i>
+      <span>Angular</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-dart-plain text-4xl"></i>
+      <span>Dart</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-rust-plain text-4xl"></i>
+      <span>Rust</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-threejs-original text-4xl"></i>
+      <span>Three.js</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-postgresql-plain text-4xl"></i>
+      <span>PostgreSQL</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-mongodb-plain text-4xl"></i>
+      <span>MongoDB</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-mysql-plain text-4xl"></i>
+      <span>MySQL</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-sqlite-plain text-4xl"></i>
+      <span>SQLite</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-git-plain text-4xl"></i>
+      <span>Git</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-github-original text-4xl"></i>
+      <span>GitHub</span>
+    </li>
+    <li class="flex flex-col items-center hover:scale-105 transition">
+      <i class="devicon-spring-plain text-4xl"></i>
+      <span>Spring Boot</span>
+    </li>
+  </ul>
+</section>
+
+<!-- Education -->
+<section id="education" class="px-6 md:px-24 py-12">
+  <h2
+    class="text-3xl mb-6 border-b-2 inline-block border-jet dark:border-peach pb-1"
+  >
+    Education
+  </h2>
+  <p>B.Sc. in Computer Science, University of the People</p>
+  <p>Pasadena, CA – Expected 2025 (GPA: 3.54)</p>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="px-6 md:px-24 py-12 bg-apricot dark:bg-jet/80">
+  <h2
+    class="text-3xl mb-6 border-b-2 inline-block border-jet dark:border-peach pb-1"
+  >
+    Contact
+  </h2>
+  <ul class="space-y-2">
+    <li>
+      Email:
+      <a href="mailto:neycrow3@gmail.com" class="underline"
+      >neycrow3&#64;gmail.com</a
+      >
+    </li>
+    <li>
+      LinkedIn:
+      <a
+        href="https://www.linkedin.com/in/sterlune-r-4990172b5"
+        class="underline"
+      >sterlune-r</a
+      >
+    </li>
+    <li>
+      GitHub:
+      <a href="https://github.com/iustusae" class="underline">iustusae</a>
+    </li>
+  </ul>
+</section>
+
+<!-- Footer -->
+<footer class="text-center py-6 border-t border-jet dark:border-peach">
+  &copy; 2025 Sterlune
+</footer>
+
+<!-- Octokit + Fetch Repos -->
+<script src="https://cdn.jsdelivr.net/npm/@octokit/rest@21.0.2/dist/octokit.umd.min.js"></script>
+
+<script src="repos.js" type="module"></script>
+</body>
+</html>
