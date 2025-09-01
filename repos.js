@@ -1,6 +1,6 @@
 async function fetchRepos() {
   try {
-    const response = await fetch("https://pinned.berrysauce.dev/get/iustusae");
+    const response = await fetch("https://pinned.berrysauce.dev/get/waougri");
     const repos = await response.json();
     const container = document.getElementById("repo-list");
 
