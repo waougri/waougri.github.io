@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-  </style>
-  <title>Ayman's Portfolio</title>
-  <!-- Tailwind CSS + enable class-based dark mode -->
+  <title>Ayman Ougri - Software Engineer</title>
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,266 +14,341 @@
       theme: {
         extend: {
           colors: {
-            peach: "#FFDDAB",
-            apricot: "#FFCA9C",
-            jet: "#363636",
+            // Catppuccin Mocha
+            base: '#1e1e2e',
+            mantle: '#181825',
+            crust: '#11111b',
+            text: '#cdd6f4',
+            subtext1: '#bac2de',
+            subtext0: '#a6adc8',
+            overlay2: '#9399b2',
+            overlay1: '#7f849c',
+            overlay0: '#6c7086',
+            surface2: '#585b70',
+            surface1: '#45475a',
+            surface0: '#313244',
+            lavender: '#b4befe',
+            blue: '#89b4fa',
+            sapphire: '#74c7ec',
+            sky: '#89dceb',
+            teal: '#94e2d5',
+            green: '#a6e3a1',
+            yellow: '#f9e2af',
+            peach: '#fab387',
+            maroon: '#eba0ac',
+            red: '#f38ba8',
+            mauve: '#cba6f7',
+            pink: '#f5c2e7',
+            flamingo: '#f2cdcd',
+            rosewater: '#f5e0dc',
           },
+          fontFamily: {
+            'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          }
         },
       },
     };
   </script>
 
-  <script>
-    // Move DOM manipulation to after content loads
-    document.addEventListener("DOMContentLoaded", () => {
-      const btn = document.getElementById("theme-toggle");
-      const html = document.documentElement;
-      const iconMoon = document.getElementById("icon-moon");
-      const iconSun = document.getElementById("icon-sun");
-      const THEME_KEY = "theme";
-
-      // Helper: show/hide icons based on current mode
-      function updateIcon() {
-        if (html.classList.contains("dark")) {
-          iconMoon.classList.add("hidden");
-          iconSun.classList.remove("hidden");
-        } else {
-          iconSun.classList.add("hidden");
-          iconMoon.classList.remove("hidden");
-        }
-      }
-
-      // 1. Initialize from localStorage or OS preference:
-      const stored = localStorage.getItem(THEME_KEY);
-      if (
-        stored === "dark" ||
-        (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        html.classList.add("dark");
-      }
-      updateIcon();
-
-      // 2. Toggle on button click:
-      btn.addEventListener("click", () => {
-        html.classList.toggle("dark");
-        // persist
-        localStorage.setItem(
-          THEME_KEY,
-          html.classList.contains("dark") ? "dark" : "light"
-        );
-        updateIcon();
-      });
-    });
-  </script>
-
-  <!-- Devicon for tech icons -->
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Devicons -->
   <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" rel="stylesheet" />
 
-  <!-- Fira Mono -->
-  <!-- Montserrat for your name -->
-
-  <!-- Fira Code for the rest of the site -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
-
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
     body {
-      font-family: 'Fira Code', monospace;
-      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Inter', system-ui, sans-serif;
     }
-
-    .name {
-      font-family: 'Montserrat', sans-serif;
+    .font-mono {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
     }
-
-
-    .animate-fade-in {
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-
-
-
-    }.roboto-mono-name {
-       font-family: "SF Pro Display", monospace;
-       font-optical-sizing: auto;
-       font-style: normal;
-     }
-
-     .uop {
-       background-image: linear-gradient(white, rebeccapurple);
-       color: transparent;
-       background-clip: text;
-     }
   </style>
 </head>
 
-<body class="bg-peach text-jet dark:bg-jet dark:text-peach">
-  <!-- Dark mode toggle -->
-  <div class="fixed top-4 right-4 z-50">
-    <button id="theme-toggle"
-      class="p-2 rounded-full bg-white/50 dark:bg-black/50 hover:bg-white/75 dark:hover:bg-black/75 transition"
-      aria-label="Toggle theme">
-      <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-jet" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-      </svg>
-      <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-peach hidden" fill="none"
-        viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    </button>
-  </div>
-
+<body class="bg-base text-text antialiased">
   <!-- Header -->
-  <header class="text-center py-12">
-    <h1
-            class="text-5xl md:text-7xl font-bold animate-fade-in roboto-mono-name">Ayman</h1>
-    <p class="mt-4 text-xl font-light animate-fade-in ">
-      Aspiring Software Engineer
-    </p>
+  <header class="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24">
+    <div class="max-w-4xl">
+      <h1 class="text-5xl md:text-7xl font-bold text-text mb-4 tracking-tight">
+        Ayman Ougri
+      </h1>
+      <p class="text-xl md:text-2xl text-subtext1 mb-6 font-light">
+        Software Engineer
+      </p>
+      <p class="text-lg text-subtext0 mb-8 max-w-2xl leading-relaxed">
+        Full Stack & Systems Developer specializing in Rust, C++, TypeScript, AI & Web Applications
+      </p>
+      
+      <!-- Contact Links -->
+      <div class="flex flex-wrap gap-6 text-sm">
+        <a href="mailto:neycrow3@gmail.com" 
+           class="text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+          neycrow3@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/aaougri" 
+           class="text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+          LinkedIn
+        </a>
+        <a href="https://github.com/waougri" 
+           class="text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+          GitHub
+        </a>
+      </div>
+    </div>
   </header>
 
   <!-- Projects -->
-  <section id="projects" class="px-6 md:px-24 py-12">
-    <h2 class="text-3xl mb-8 border-b-2 inline-block border-jet dark:border-peach pb-1">
-      Projects
-    </h2>
-    <div id="repo-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  <section class="px-6 md:px-12 lg:px-24 py-20">
+    <div class="max-w-6xl">
+      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Selected Work</h2>
+      
+      <div class="space-y-16">
+        
+        <!-- Project 1: Lexia -->
+        <div class="group">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
+              Lexia – AI Document Analysis Chatbot
+            </h3>
+            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2025</span>
+          </div>
+          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
+            AI-powered chatbot in C# for document reading and analysis, integrating large language models 
+            for natural language processing. Enables interactive document querying.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">C#</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">AI/LLM</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">NLP</span>
+          </div>
+          <a href="https://github.com/waougri/lexia" 
+             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+            View Project →
+          </a>
+        </div>
+
+        <!-- Project 2: HTTPxx -->
+        <div class="group">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
+              HTTPxx – High-Performance Web Server
+            </h3>
+            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2024-2025</span>
+          </div>
+          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
+            HTTP/1.1-compliant web server in C++ with multi-threading support and optimized memory management. 
+            Achieved 35% throughput improvement with 15k RPS performance.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">C++</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">HTTP/1.1</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Multi-threading</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Performance</span>
+          </div>
+          <a href="https://github.com/waougri/httpxx" 
+             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+            View Project →
+          </a>
+        </div>
+
+        <!-- Project 3: Giftint -->
+        <div class="group">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
+              Giftint – GIF Recoloring CLI Tool
+            </h3>
+            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2025</span>
+          </div>
+          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
+            Command-line tool in Rust for transforming color palettes of animated GIFs. 
+            Implements advanced color quantization algorithms and palette mapping.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Rust</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">CLI</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Image Processing</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Algorithms</span>
+          </div>
+          <a href="https://github.com/waougri/giftint" 
+             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+            View Project →
+          </a>
+        </div>
+
+        <!-- Project 4: Graphxx -->
+        <div class="group">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
+              Graphxx – Mathematical Function Visualizer
+            </h3>
+            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2024</span>
+          </div>
+          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
+            C++ application using SFML for real-time visualization of complex mathematical functions. 
+            Optimized rendering achieved 40% performance improvement.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">C++</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">SFML</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Math Visualization</span>
+            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Real-time</span>
+          </div>
+          <a href="https://github.com/waougri/Graphxx" 
+             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
+            View Project →
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="px-6 md:px-12 lg:px-24 py-20 bg-mantle">
+    <div class="max-w-6xl">
+      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Experience</h2>
+      
+      <div class="space-y-12">
+        <div>
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-medium text-text mb-1">Student Software Engineer</h3>
+              <p class="text-subtext1">Self-employed</p>
+            </div>
+            <span class="text-sm font-mono text-overlay1 mt-2 md:mt-0">Aug 2022 - Present</span>
+          </div>
+          <p class="text-subtext0 leading-relaxed max-w-3xl">
+            Developing and maintaining software applications using modern technologies. 
+            Implementing algorithms and data structures for academic and personal projects. 
+            Collaborating on team projects with focus on problem-solving, debugging, and version control practices.
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Skills -->
-  <!-- Skills Section -->
-  <section id="skills" class="px-6 md:px-24 py-12 bg-apricot dark:bg-jet/80">
-    <h2 class="text-3xl mb-8 border-b-2 inline-block border-jet dark:border-peach pb-1">
-      Skills
-    </h2>
-    <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-cplusplus-plain text-4xl"></i>
-        <span>C++</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-c-plain text-4xl"></i>
-        <span>C</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-java-plain text-4xl"></i>
-        <span>Java</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-python-plain text-4xl"></i>
-        <span>Python</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-javascript-plain text-4xl"></i>
-        <span>JavaScript</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-nodejs-plain text-4xl"></i>
-        <span>Node.js</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-typescript-plain text-4xl"></i>
-        <span>TypeScript</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-angularjs-plain text-4xl"></i>
-        <span>Angular</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-dart-plain text-4xl"></i>
-        <span>Dart</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-rust-plain text-4xl"></i>
-        <span>Rust</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-threejs-original text-4xl"></i>
-        <span>Three.js</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-postgresql-plain text-4xl"></i>
-        <span>PostgreSQL</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-mongodb-plain text-4xl"></i>
-        <span>MongoDB</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-mysql-plain text-4xl"></i>
-        <span>MySQL</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-sqlite-plain text-4xl"></i>
-        <span>SQLite</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-git-plain text-4xl"></i>
-        <span>Git</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-github-original text-4xl"></i>
-        <span>GitHub</span>
-      </li>
-      <li class="flex flex-col items-center hover:scale-105 transition">
-        <i class="devicon-spring-plain text-4xl"></i>
-        <span>Spring Boot</span>
-      </li>
-    </ul>
+  <section class="px-6 md:px-12 lg:px-24 py-20">
+    <div class="max-w-6xl">
+      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Skills</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+        
+        <!-- Languages -->
+        <div>
+          <h3 class="text-lg font-medium text-text mb-6">Languages</h3>
+          <div class="space-y-3">
+            <div class="text-subtext0">Rust</div>
+            <div class="text-subtext0">C++</div>
+            <div class="text-subtext0">C#</div>
+            <div class="text-subtext0">TypeScript</div>
+            <div class="text-subtext0">JavaScript</div>
+            <div class="text-subtext0">Python</div>
+            <div class="text-subtext0">Java</div>
+            <div class="text-subtext0">C</div>
+            <div class="text-subtext0">Kotlin</div>
+            <div class="text-subtext0">Swift</div>
+          </div>
+        </div>
+
+        <!-- Frameworks -->
+        <div>
+          <h3 class="text-lg font-medium text-text mb-6">Frameworks & Tools</h3>
+          <div class="space-y-3">
+            <div class="text-subtext0">Spring Boot</div>
+            <div class="text-subtext0">Node.js</div>
+            <div class="text-subtext0">Angular</div>
+            <div class="text-subtext0">SFML</div>
+            <div class="text-subtext0">Git</div>
+            <div class="text-subtext0">Linux</div>
+          </div>
+        </div>
+
+        <!-- Specializations -->
+        <div>
+          <h3 class="text-lg font-medium text-text mb-6">Specializations</h3>
+          <div class="space-y-3">
+            <div class="text-subtext0">Systems Programming</div>
+            <div class="text-subtext0">AI/LLM Integration</div>
+            <div class="text-subtext0">Performance Optimization</div>
+            <div class="text-subtext0">Web Servers</div>
+            <div class="text-subtext0">Image Processing</div>
+            <div class="text-subtext0">CLI Development</div>
+            <div class="text-subtext0">Application Security</div>
+            <div class="text-subtext0">Natural Language Processing</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </section>
 
   <!-- Education -->
-  <section id="education" class="px-6 md:px-24 py-12">
-    <h2 class="text-3xl mb-6 border-b-2 inline-block border-jet dark:border-peach pb-1">
-      Education
-    </h2>
-    <p>B.Sc. in Computer Science, <span class="uop">University of the People</span>
-    </p>
-    <p>Pasadena, CA – Expected 2025</p>
-  </section>
+  <section class="px-6 md:px-12 lg:px-24 py-20 bg-mantle">
+    <div class="max-w-6xl">
+      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Education</h2>
+      
+      <div class="space-y-12">
+        
+        <!-- Degree -->
+        <div>
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-medium text-text mb-1">Bachelor's Degree, Computer Science</h3>
+              <p class="text-subtext1">University of the People</p>
+            </div>
+            <span class="text-sm font-mono text-overlay1 mt-2 md:mt-0">2022 - 2025</span>
+          </div>
+          <p class="text-subtext0 leading-relaxed max-w-3xl">
+            Comprehensive program covering algorithms, data structures, software engineering, and system design.
+          </p>
+        </div>
 
-  <!-- Contact -->
-  <section id="contact" class="px-6 md:px-24 py-12 bg-apricot dark:bg-jet/80">
-    <h2 class="text-3xl mb-6 border-b-2 inline-block border-jet dark:border-peach pb-1">
-      Contact
-    </h2>
-    <ul class="space-y-2">
-      <li>
-        Email:
-        <a href="mailto:neycrow3@gmail.com" class="underline">neycrow3&#64;gmail.com</a>
-      </li>
-      <li>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/sterlune-r-4990172b5" class="underline">sterlune-r</a>
-      </li>
-      <li>
-        GitHub:
-        <a href="https://github.com/waougri" class="underline">waougri</a>
-      </li>
-    </ul>
+        <!-- Certification -->
+        <div>
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-medium text-text mb-1">Network & Application Security Certification</h3>
+              <p class="text-subtext1">University of the People</p>
+            </div>
+            <span class="text-sm font-mono text-overlay1 mt-2 md:mt-0">Sep 2025</span>
+          </div>
+          <p class="text-subtext0 leading-relaxed max-w-3xl">
+            Specialized certification in application security principles and cybersecurity best practices.
+          </p>
+        </div>
+
+      </div>
+    </div>
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-6 border-t border-jet dark:border-peach">
-    &copy; 2025 Ayman
+  <footer class="px-6 md:px-12 lg:px-24 py-12 border-t border-surface0">
+    <div class="max-w-6xl">
+      <div class="flex flex-col md:flex-row md:items-center justify-between">
+        <p class="text-sm text-overlay1 mb-4 md:mb-0">
+          © 2025 Ayman Ougri
+        </p>
+        <div class="flex gap-6 text-sm">
+          <a href="mailto:neycrow3@gmail.com" 
+             class="text-overlay1 hover:text-blue transition-colors">
+            Email
+          </a>
+          <a href="https://www.linkedin.com/in/aaougri" 
+             class="text-overlay1 hover:text-blue transition-colors">
+            LinkedIn
+          </a>
+          <a href="https://github.com/waougri" 
+             class="text-overlay1 hover:text-blue transition-colors">
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
   </footer>
 
-  <script src="repos.js" type="module"></script>
 </body>
-
 </html>
