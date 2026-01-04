@@ -1,12 +1,10 @@
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ayman Ougri - Software Engineer</title>
   
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -14,530 +12,533 @@
       theme: {
         extend: {
           colors: {
-            // Catppuccin Mocha
-            base: '#1e1e2e',
-            mantle: '#181825',
-            crust: '#11111b',
-            text: '#cdd6f4',
-            subtext1: '#bac2de',
-            subtext0: '#a6adc8',
-            overlay2: '#9399b2',
-            overlay1: '#7f849c',
-            overlay0: '#6c7086',
-            surface2: '#585b70',
-            surface1: '#45475a',
-            surface0: '#313244',
-            lavender: '#b4befe',
-            blue: '#89b4fa',
-            sapphire: '#74c7ec',
-            sky: '#89dceb',
-            teal: '#94e2d5',
-            green: '#a6e3a1',
-            yellow: '#f9e2af',
-            peach: '#fab387',
-            maroon: '#eba0ac',
-            red: '#f38ba8',
-            mauve: '#cba6f7',
-            pink: '#f5c2e7',
-            flamingo: '#f2cdcd',
-            rosewater: '#f5e0dc',
-          },
-          fontFamily: {
-            'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
-            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            primary: '#000000',
+            secondary: '#ffffff',
+            accent: '#0066ff',
           }
-        },
-      },
+        }
+      }
     };
   </script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Devicons -->
-  <link href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" rel="stylesheet" />
-
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      position: relative;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
       overflow-x: hidden;
-    }
-    .font-mono {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      line-height: 1.6;
     }
 
-    /* Animated Background */
-    .animated-bg {
+    /* Cursor Trail Effect */
+    .cursor-glow {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: #1e1e2e;
-      overflow: hidden;
-    }
-
-    .gradient-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-      animation: float 20s infinite ease-in-out;
-    }
-
-    .orb-1 {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, #89b4fa 0%, transparent 70%);
-      top: -200px;
-      left: -200px;
-      animation-delay: 0s;
-    }
-
-    .orb-2 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #cba6f7 0%, transparent 70%);
-      bottom: -150px;
-      right: -150px;
-      animation-delay: 5s;
-    }
-
-    .orb-3 {
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, #74c7ec 0%, transparent 70%);
-      top: 50%;
-      right: -250px;
-      animation-delay: 10s;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.2s ease-out;
+      z-index: 1;
     }
 
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      33% {
-        transform: translate(30px, -50px) scale(1.1);
-      }
-      66% {
-        transform: translate(-20px, 20px) scale(0.9);
-      }
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Language Bar */
-    .lang-bar {
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
       display: flex;
-      background: #313244;
+      align-items: center;
+      position: relative;
+      z-index: 10;
     }
 
-    .lang-segment {
+    .hero-title {
+      font-size: clamp(3rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      font-weight: 200;
+      letter-spacing: -0.02em;
+      color: #888;
+      margin-bottom: 3rem;
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 4rem;
+    }
+
+    /* Project Cards */
+    .project-card {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      padding: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
       height: 100%;
-      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
 
-    .lang-segment:hover {
-      opacity: 0.8;
+    .project-card:hover {
+      border-color: #0066ff;
+      transform: translateY(-8px);
     }
 
-    /* Icon styling */
-    .lang-icon {
-      font-size: 2rem;
-      transition: transform 0.2s ease;
+    .project-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
     }
 
-    .lang-icon:hover {
+    .project-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.6s;
+    }
+
+    .project-card:hover .project-image::before {
+      left: 100%;
+    }
+
+    .project-content {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .project-description {
+      color: #888;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.8rem;
+      background: rgba(0, 102, 255, 0.1);
+      color: #0066ff;
+      border: 1px solid rgba(0, 102, 255, 0.3);
+      transition: all 0.2s;
+    }
+
+    .tech-tag:hover {
+      background: rgba(0, 102, 255, 0.2);
+      border-color: #0066ff;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #0066ff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap 0.3s;
+    }
+
+    .project-link:hover {
+      gap: 1rem;
+    }
+
+    /* Experience Cards */
+    .exp-card {
+      background: #0a0a0a;
+      border-left: 3px solid #0066ff;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s;
+    }
+
+    .exp-card:hover {
+      background: #111;
+      padding-left: 3rem;
+    }
+
+    .exp-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .exp-company {
+      color: #0066ff;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-date {
+      color: #666;
+      font-size: 0.875rem;
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 1rem;
+    }
+
+    .exp-description {
+      color: #aaa;
+      line-height: 1.8;
+    }
+
+    .exp-description li {
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+    }
+
+    /* Skills Section */
+    .skill-category {
+      margin-bottom: 3rem;
+    }
+
+    .skill-category-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .skill-item {
+      padding: 1rem 1.5rem;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .skill-item:hover {
+      background: #111;
+      border-color: #0066ff;
       transform: translateY(-2px);
     }
 
-    /* Tooltip */
-    .lang-tooltip {
+    /* Links */
+    .link {
+      color: #fff;
+      text-decoration: none;
       position: relative;
-      display: inline-block;
+      font-weight: 500;
+      transition: color 0.3s;
     }
 
-    .lang-tooltip .tooltiptext {
-      visibility: hidden;
-      background-color: #313244;
-      color: #cdd6f4;
-      text-align: center;
-      border-radius: 6px;
-      padding: 5px 10px;
+    .link::after {
+      content: '';
       position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      white-space: nowrap;
-      font-size: 0.75rem;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #0066ff;
+      transition: width 0.3s;
     }
 
-    .lang-tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
+    .link:hover {
+      color: #0066ff;
+    }
+
+    .link:hover::after {
+      width: 100%;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-logo {
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #1a1a1a;
+      padding: 4rem;
+      text-align: center;
+      color: #666;
+    }
+
+    /* Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      padding: 2rem;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .contact-item:hover {
+      border-color: #0066ff;
+      transform: translateY(-4px);
+    }
+
+    .contact-label {
+      font-size: 0.875rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-value {
+      color: #0066ff;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1.5rem 1.5rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .section-title {
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
 
-<body class="bg-base text-text antialiased">
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="gradient-orb orb-1"></div>
-    <div class="gradient-orb orb-2"></div>
-    <div class="gradient-orb orb-3"></div>
-  </div>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- Header -->
-  <header class="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24">
-    <div class="max-w-4xl">
-      <h1 class="text-5xl md:text-7xl font-bold text-text mb-4 tracking-tight">
-        Ayman Ougri
-      </h1>
-      <p class="text-xl md:text-2xl text-subtext1 mb-6 font-light">
-        Software Engineer
-      </p>
-      <p class="text-lg text-subtext0 mb-8 max-w-2xl leading-relaxed">
-        Full Stack & Systems Developer specializing in Rust, C++, TypeScript, AI & Web Applications
-      </p>
-      
-      <!-- Contact Links -->
-      <div class="flex flex-wrap gap-6 text-sm">
-        <a href="mailto:neycrow3@gmail.com" 
-           class="text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-          neycrow3@gmail.com
-        </a>
-        <a href="https://www.linkedin.com/in/aaougri" 
-           class="text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-          LinkedIn
-        </a>
-        <a href="https://github.com/waougri" 
-           class="text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-          GitHub
-        </a>
-      </div>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">AYMAN OUGRI</div>
+    <div class="nav-links">
+      <a href="#work" class="link">Work</a>
+      <a href="#experience" class="link">Experience</a>
+      <a href="#skills" class="link">Skills</a>
+      <a href="#contact" class="link">Contact</a>
     </div>
-  </header>
+  </nav>
 
-  <!-- Projects -->
-  <section class="px-6 md:px-12 lg:px-24 py-20">
-    <div class="max-w-6xl">
-      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Selected Work</h2>
-      
-      <div class="space-y-16">
-        
-        <!-- Project 1: Lexia -->
-        <div class="group">
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
-              Lexia – AI Document Analysis Chatbot
-            </h3>
-            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2025</span>
-          </div>
-          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
-            AI-powered chatbot in C# for document reading and analysis, integrating large language models 
-            for natural language processing. Enables interactive document querying.
-          </p>
-          
-          <!-- Language Bar -->
-          <div class="mb-3">
-            <div class="lang-bar mb-2">
-              <div class="lang-segment" style="width: 100%; background-color: #178600;"></div>
-            </div>
-            <div class="flex flex-wrap gap-3 text-xs">
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #178600;"></span>
-                <span class="text-subtext0">C# 100%</span>
-              </span>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">C#</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">AI/LLM</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">NLP</span>
-          </div>
-          <a href="https://github.com/waougri/lexia" 
-             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-            View Project →
-          </a>
-        </div>
-
-        <!-- Project 2: HTTPxx -->
-        <div class="group">
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
-              HTTPxx – High-Performance Web Server
-            </h3>
-            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2024-2025</span>
-          </div>
-          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
-            HTTP/1.1-compliant web server in C++ with multi-threading support and optimized memory management. 
-            Achieved 35% throughput improvement with 15k RPS performance.
-          </p>
-          
-          <!-- Language Bar -->
-          <div class="mb-3">
-            <div class="lang-bar mb-2">
-              <div class="lang-segment" style="width: 85%; background-color: #f34b7d;"></div>
-              <div class="lang-segment" style="width: 10%; background-color: #89e051;"></div>
-              <div class="lang-segment" style="width: 5%; background-color: #563d7c;"></div>
-            </div>
-            <div class="flex flex-wrap gap-3 text-xs">
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #f34b7d;"></span>
-                <span class="text-subtext0">C++ 85%</span>
-              </span>
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #89e051;"></span>
-                <span class="text-subtext0">Shell 10%</span>
-              </span>
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #563d7c;"></span>
-                <span class="text-subtext0">CMake 5%</span>
-              </span>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">C++</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">HTTP/1.1</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Multi-threading</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Performance</span>
-          </div>
-          <a href="https://github.com/waougri/httpxx" 
-             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-            View Project →
-          </a>
-        </div>
-
-        <!-- Project 3: Giftint -->
-        <div class="group">
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
-              Giftint – GIF Recoloring CLI Tool
-            </h3>
-            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2025</span>
-          </div>
-          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
-            Command-line tool in Rust for transforming color palettes of animated GIFs. 
-            Implements advanced color quantization algorithms and palette mapping.
-          </p>
-          
-          <!-- Language Bar -->
-          <div class="mb-3">
-            <div class="lang-bar mb-2">
-              <div class="lang-segment" style="width: 100%; background-color: #dea584;"></div>
-            </div>
-            <div class="flex flex-wrap gap-3 text-xs">
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #dea584;"></span>
-                <span class="text-subtext0">Rust 100%</span>
-              </span>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Rust</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">CLI</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Image Processing</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Algorithms</span>
-          </div>
-          <a href="https://github.com/waougri/giftint" 
-             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-            View Project →
-          </a>
-        </div>
-
-        <!-- Project 4: Graphxx -->
-        <div class="group">
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <h3 class="text-xl font-medium text-text group-hover:text-blue transition-colors">
-              Graphxx – Mathematical Function Visualizer
-            </h3>
-            <span class="text-sm font-mono text-overlay1 mt-1 md:mt-0">2024</span>
-          </div>
-          <p class="text-subtext0 mb-4 max-w-3xl leading-relaxed">
-            C++ application using SFML for real-time visualization of complex mathematical functions. 
-            Optimized rendering achieved 40% performance improvement.
-          </p>
-          
-          <!-- Language Bar -->
-          <div class="mb-3">
-            <div class="lang-bar mb-2">
-              <div class="lang-segment" style="width: 92%; background-color: #f34b7d;"></div>
-              <div class="lang-segment" style="width: 8%; background-color: #563d7c;"></div>
-            </div>
-            <div class="flex flex-wrap gap-3 text-xs">
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #f34b7d;"></span>
-                <span class="text-subtext0">C++ 92%</span>
-              </span>
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full" style="background-color: #563d7c;"></span>
-                <span class="text-subtext0">CMake 8%</span>
-              </span>
-            </div>
-          </div>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">C++</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">SFML</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Math Visualization</span>
-            <span class="text-xs font-mono bg-surface0 text-subtext1 px-2 py-1 rounded">Real-time</span>
-          </div>
-          <a href="https://github.com/waougri/Graphxx" 
-             class="text-sm text-blue hover:text-sapphire transition-colors border-b border-transparent hover:border-blue">
-            View Project →
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience -->
-  <section class="px-6 md:px-12 lg:px-24 py-20 bg-mantle/50 backdrop-blur-sm">
-    <div class="max-w-6xl">
-      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Experience</h2>
-      
-      <div class="space-y-12">
-        <div>
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <div>
-              <h3 class="text-xl font-medium text-text mb-1">Student Software Engineer</h3>
-              <p class="text-subtext1">Self-employed</p>
-            </div>
-            <span class="text-sm font-mono text-overlay1 mt-2 md:mt-0">Aug 2022 - Present</span>
-          </div>
-          <p class="text-subtext0 leading-relaxed max-w-3xl">
-            Developing and maintaining software applications using modern technologies. 
-            Implementing algorithms and data structures for academic and personal projects. 
-            Collaborating on team projects with focus on problem-solving, debugging, and version control practices.
-          </p>
+  <!-- Hero -->
+  <section class="hero px-6 md:px-16 lg:px-24">
+    <div class="max-w-7xl w-full">
+      <div class="reveal">
+        <h1 class="hero-title">
+          Software<br>Engineer
+        </h1>
+        <p class="hero-subtitle">
+          Building high-performance systems & web applications
+        </p>
+        <div class="flex flex-wrap gap-8 text-lg">
+          <a href="#work" class="link">View Work ↓</a>
+          <a href="mailto:waougri@gmail.com" class="link">waougri@gmail.com</a>
+          <a href="https://github.com/waougri" class="link">GitHub</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills -->
-  <section class="px-6 md:px-12 lg:px-24 py-20">
-    <div class="max-w-6xl">
-      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Skills</h2>
+  <!-- Work Section -->
+  <section id="work" class="px-6 md:px-16 lg:px-24 py-32">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title reveal">Selected Work</h2>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div class="grid md:grid-cols-2 gap-8">
         
-        <!-- Languages -->
-        <div>
-          <h3 class="text-lg font-medium text-text mb-6">Languages</h3>
-          <div class="space-y-4">
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-rust-original colored lang-icon"></i>
-              <span>Rust</span>
-              <span class="tooltiptext">Rust</span>
+        <!-- Crown Point Consulting -->
+        <div class="project-card reveal">
+          <div class="project-image" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+            <span style="font-size: 3rem;">CPC</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Crown Point Consulting</h3>
+            <p class="project-description">
+              Full corporate website with custom design system, internal tools, and PWA functionality. Built with modern web standards featuring HTTP/2, CDN optimization, and responsive design.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Tailwind CSS</span>
+              <span class="tech-tag">Alpine.js</span>
+              <span class="tech-tag">Netlify</span>
+              <span class="tech-tag">PWA</span>
+              <span class="tech-tag">HTTP/2</span>
             </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-cplusplus-plain colored lang-icon"></i>
-              <span>C++</span>
-              <span class="tooltiptext">C++</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-csharp-plain colored lang-icon"></i>
-              <span>C#</span>
-              <span class="tooltiptext">C#</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-typescript-plain colored lang-icon"></i>
-              <span>TypeScript</span>
-              <span class="tooltiptext">TypeScript</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-javascript-plain colored lang-icon"></i>
-              <span>JavaScript</span>
-              <span class="tooltiptext">JavaScript</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-python-plain colored lang-icon"></i>
-              <span>Python</span>
-              <span class="tooltiptext">Python</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-java-plain colored lang-icon"></i>
-              <span>Java</span>
-              <span class="tooltiptext">Java</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-c-plain colored lang-icon"></i>
-              <span>C</span>
-              <span class="tooltiptext">C</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-kotlin-plain colored lang-icon"></i>
-              <span>Kotlin</span>
-              <span class="tooltiptext">Kotlin</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-swift-plain colored lang-icon"></i>
-              <span>Swift</span>
-              <span class="tooltiptext">Swift</span>
-            </div>
+            <a href="https://crownpointconsult.com/" class="project-link" target="_blank">
+              View Live Site →
+            </a>
           </div>
         </div>
 
-        <!-- Frameworks -->
-        <div>
-          <h3 class="text-lg font-medium text-text mb-6">Frameworks & Tools</h3>
-          <div class="space-y-4">
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-spring-original colored lang-icon"></i>
-              <span>Spring Boot</span>
-              <span class="tooltiptext">Spring Boot</span>
+        <!-- HTTPxx -->
+        <div class="project-card reveal">
+          <div class="project-image" style="background: linear-gradient(135deg, #f34b7d 0%, #ff6b9d 100%);">
+            <span>HTTP</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">HTTPxx</h3>
+            <p class="project-description">
+              High-performance HTTP/1.1 web server in C++ with multi-threading support. Handles 15,000 RPS with optimized memory management, achieving 35% throughput improvement.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">HTTP/1.1</span>
+              <span class="tech-tag">Multi-threading</span>
+              <span class="tech-tag">Performance</span>
             </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-nodejs-plain colored lang-icon"></i>
-              <span>Node.js</span>
-              <span class="tooltiptext">Node.js</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-angular-plain colored lang-icon"></i>
-              <span>Angular</span>
-              <span class="tooltiptext">Angular</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0">
-              <i class="devicon-cplusplus-plain colored lang-icon"></i>
-              <span>SFML</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-git-plain colored lang-icon"></i>
-              <span>Git</span>
-              <span class="tooltiptext">Git</span>
-            </div>
-            <div class="flex items-center gap-3 text-subtext0 lang-tooltip">
-              <i class="devicon-linux-plain colored lang-icon"></i>
-              <span>Linux</span>
-              <span class="tooltiptext">Linux</span>
-            </div>
+            <a href="https://github.com/waougri/httpxx" class="project-link">
+              View on GitHub →
+            </a>
           </div>
         </div>
 
-        <!-- Specializations -->
-        <div>
-          <h3 class="text-lg font-medium text-text mb-6">Specializations</h3>
-          <div class="space-y-3">
-            <div class="text-subtext0">Systems Programming</div>
-            <div class="text-subtext0">AI/LLM Integration</div>
-            <div class="text-subtext0">Performance Optimization</div>
-            <div class="text-subtext0">Web Servers</div>
-            <div class="text-subtext0">Image Processing</div>
-            <div class="text-subtext0">CLI Development</div>
-            <div class="text-subtext0">Application Security</div>
-            <div class="text-subtext0">Natural Language Processing</div>
+        <!-- Lexia -->
+        <div class="project-card reveal">
+          <div class="project-image" style="background: linear-gradient(135deg, #178600 0%, #5ac946 100%);">
+            <span>AI</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Lexia</h3>
+            <p class="project-description">
+              AI-powered document analysis chatbot integrating large language models for natural language processing. Enables interactive document querying with advanced NLP capabilities.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">AI/LLM</span>
+              <span class="tech-tag">NLP</span>
+              <span class="tech-tag">Document Analysis</span>
+            </div>
+            <a href="https://github.com/waougri/lexia" class="project-link">
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+
+        <!-- Giftint -->
+        <div class="project-card reveal">
+          <div class="project-image" style="background: linear-gradient(135deg, #dea584 0%, #f5c7b0 100%);">
+            <span>GIF</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Giftint</h3>
+            <p class="project-description">
+              Command-line tool in Rust for transforming color palettes of animated GIFs. Implements advanced color quantization algorithms and intelligent palette mapping.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Rust</span>
+              <span class="tech-tag">CLI</span>
+              <span class="tech-tag">Image Processing</span>
+              <span class="tech-tag">Algorithms</span>
+            </div>
+            <a href="https://github.com/waougri/giftint" class="project-link">
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+
+        <!-- Graphxx -->
+        <div class="project-card reveal">
+          <div class="project-image" style="background: linear-gradient(135deg, #563d7c 0%, #8b5cf6 100%);">
+            <span>Σ</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Graphxx</h3>
+            <p class="project-description">
+              Mathematical function visualizer using SFML for real-time rendering of complex functions. Optimized computation achieving 40% performance improvement.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">SFML</span>
+              <span class="tech-tag">Math Visualization</span>
+              <span class="tech-tag">Real-time</span>
+            </div>
+            <a href="https://github.com/waougri/Graphxx" class="project-link">
+              View on GitHub →
+            </a>
           </div>
         </div>
 
@@ -545,69 +546,215 @@
     </div>
   </section>
 
-  <!-- Education -->
-  <section class="px-6 md:px-12 lg:px-24 py-20 bg-mantle/50 backdrop-blur-sm">
-    <div class="max-w-6xl">
-      <h2 class="text-3xl font-semibold text-text mb-16 tracking-tight">Education</h2>
+  <!-- Experience Section -->
+  <section id="experience" class="px-6 md:px-16 lg:px-24 py-32 bg-black">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title reveal">Experience</h2>
       
-      <div class="space-y-12">
+      <div class="reveal">
+        <div class="exp-card">
+          <h3 class="exp-title">Lead Freelance Software Engineer</h3>
+          <div class="exp-company">Starlith</div>
+          <div class="exp-date">AUG 2023 — PRESENT</div>
+          <ul class="exp-description">
+            <li>Deliver full-stack software solutions, system architecture, and custom application development</li>
+            <li>Design and maintain scalable web applications, internal tools, dashboards, and backend systems</li>
+            <li>Build core business logic, APIs, data pipelines using C++, Rust, C#, Python, TypeScript, and Java</li>
+            <li>Apply computer science fundamentals and algorithms to solve real-world engineering problems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="exp-card">
+          <h3 class="exp-title">Python & FastAPI Backend Intern</h3>
+          <div class="exp-company">AXENTRA OS</div>
+          <div class="exp-date">OCT 2024 — NOV 2025</div>
+          <ul class="exp-description">
+            <li>Developed and maintained RESTful APIs using FastAPI and Python for backend services</li>
+            <li>Implemented real-time API integration with Shiprocket, handling webhooks for live shipment events</li>
+            <li>Built secure webhook endpoints with request validation, error handling, and reliable event processing</li>
+            <li>Worked with PostgreSQL and MySQL databases including schema design, queries, and optimization</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="exp-card">
+          <h3 class="exp-title">Backend Developer Intern</h3>
+          <div class="exp-company">VNB-IT</div>
+          <div class="exp-date">SEP 2025 — OCT 2025</div>
+          <ul class="exp-description">
+            <li>Designed and maintained secure RESTful APIs using Node.js and Express.js</li>
+            <li>Optimized PostgreSQL databases with query optimization and transaction handling</li>
+            <li>Implemented JWT-based authentication, role-based access control, and security best practices</li>
+            <li>Wrote comprehensive unit and integration tests using Jest/Mocha to ensure reliability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="px-6 md:px-16 lg:px-24 py-32">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title reveal">Technical Skills</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
         
-        <!-- Degree -->
-        <div>
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <div>
-              <h3 class="text-xl font-medium text-text mb-1">Bachelor's Degree, Computer Science</h3>
-              <p class="text-subtext1">University of the People</p>
-            </div>
-            <span class="text-sm font-mono text-overlay1 mt-2 md:mt-0">2022 - 2025</span>
+        <div class="skill-category reveal">
+          <h3 class="skill-category-title">Systems Programming</h3>
+          <div class="skills-grid">
+            <div class="skill-item">C++</div>
+            <div class="skill-item">Rust</div>
+            <div class="skill-item">Multi-threading</div>
+            <div class="skill-item">Performance Optimization</div>
+            <div class="skill-item">Memory Management</div>
           </div>
-          <p class="text-subtext0 leading-relaxed max-w-3xl">
-            Comprehensive program covering algorithms, data structures, software engineering, and system design.
-          </p>
         </div>
 
-        <!-- Certification -->
-        <div>
-          <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-            <div>
-              <h3 class="text-xl font-medium text-text mb-1">Network & Application Security Certification</h3>
-              <p class="text-subtext1">University of the People</p>
-            </div>
-            <span class="text-sm font-mono text-overlay1 mt-2 md:mt-0">Sep 2025</span>
+        <div class="skill-category reveal">
+          <h3 class="skill-category-title">Backend Development</h3>
+          <div class="skills-grid">
+            <div class="skill-item">Python</div>
+            <div class="skill-item">FastAPI</div>
+            <div class="skill-item">Node.js</div>
+            <div class="skill-item">Express.js</div>
+            <div class="skill-item">RESTful APIs</div>
+            <div class="skill-item">Spring Boot</div>
           </div>
-          <p class="text-subtext0 leading-relaxed max-w-3xl">
-            Specialized certification in application security principles and cybersecurity best practices.
-          </p>
         </div>
 
+        <div class="skill-category reveal">
+          <h3 class="skill-category-title">Databases</h3>
+          <div class="skills-grid">
+            <div class="skill-item">PostgreSQL</div>
+            <div class="skill-item">MySQL</div>
+            <div class="skill-item">TypeORM</div>
+            <div class="skill-item">Sequelize</div>
+            <div class="skill-item">Query Optimization</div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <h3 class="skill-category-title">Web Technologies</h3>
+          <div class="skills-grid">
+            <div class="skill-item">TypeScript</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">Java</div>
+            <div class="skill-item">Kotlin</div>
+            <div class="skill-item">C#</div>
+            <div class="skill-item">Tailwind CSS</div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <h3 class="skill-category-title">Security & DevOps</h3>
+          <div class="skills-grid">
+            <div class="skill-item">JWT Authentication</div>
+            <div class="skill-item">RBAC</div>
+            <div class="skill-item">Git</div>
+            <div class="skill-item">CI/CD</div>
+            <div class="skill-item">Linux</div>
+            <div class="skill-item">Docker</div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <h3 class="skill-category-title">AI/ML</h3>
+          <div class="skills-grid">
+            <div class="skill-item">LLM Integration</div>
+            <div class="skill-item">NLP</div>
+            <div class="skill-item">Document Analysis</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="px-6 md:px-16 lg:px-24 py-32 bg-black">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="section-title reveal">Get In Touch</h2>
+      
+      <div class="contact-grid reveal">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a href="mailto:waougri@gmail.com" class="contact-value">waougri@gmail.com</a>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <a href="tel:5616981882" class="contact-value">+1 (561) 698-1882</a>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-label">GitHub</div>
+          <a href="https://github.com/waougri" class="contact-value" target="_blank">waougri</a>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://www.linkedin.com/in/aaougri" class="contact-value" target="_blank">aaougri</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="px-6 md:px-12 lg:px-24 py-12 border-t border-surface0">
-    <div class="max-w-6xl">
-      <div class="flex flex-col md:flex-row md:items-center justify-between">
-        <p class="text-sm text-overlay1 mb-4 md:mb-0">
-          © 2025 Ayman Ougri
-        </p>
-        <div class="flex gap-6 text-sm">
-          <a href="mailto:neycrow3@gmail.com" 
-             class="text-overlay1 hover:text-blue transition-colors">
-            Email
-          </a>
-          <a href="https://www.linkedin.com/in/aaougri" 
-             class="text-overlay1 hover:text-blue transition-colors">
-            LinkedIn
-          </a>
-          <a href="https://github.com/waougri" 
-             class="text-overlay1 hover:text-blue transition-colors">
-            GitHub
-          </a>
-        </div>
-      </div>
-    </div>
+  <footer>
+    <p>© 2025 Ayman Ougri. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.875rem;">Bachelor's in Computer Science, University of the People (2022-2025)</p>
   </footer>
 
+  <script>
+    // Cursor glow effect
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = 0, mouseY = 0;
+    let glowX = 0, glowY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.1;
+      glowY += (mouseY - glowY) * 0.1;
+      cursorGlow.style.left = glowX + 'px';
+      cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    // Scroll reveal animation
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealOnScroll = () => {
+      revealElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 100) {
+          el.classList.add('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
