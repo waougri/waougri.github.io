@@ -1,760 +1,241 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ayman Ougri - Software Engineer</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            primary: '#000000',
-            secondary: '#ffffff',
-            accent: '#0066ff',
-          }
-        }
-      }
-    };
-  </script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* Cursor Trail Effect */
-    .cursor-glow {
-      position: fixed;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform 0.2s ease-out;
-      z-index: 1;
-    }
-
-    /* Scroll Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      z-index: 10;
-    }
-
-    .hero-title {
-      font-size: clamp(3rem, 12vw, 9rem);
-      font-weight: 900;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      margin-bottom: 2rem;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.5rem, 4vw, 3rem);
-      font-weight: 200;
-      letter-spacing: -0.02em;
-      color: #888;
-      margin-bottom: 3rem;
-    }
-
-    /* Section Headers */
-    .section-title {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 4rem;
-    }
-
-    /* Project Cards */
-    .project-card {
-      background: #0a0a0a;
-      border: 1px solid #1a1a1a;
-      padding: 0;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      overflow: hidden;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-card:hover {
-      border-color: #0066ff;
-      transform: translateY(-8px);
-    }
-
-    .project-image {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: linear-gradient(135deg, #0066ff 0%, #00ccff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      font-weight: 900;
-      color: rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-image::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.6s;
-    }
-
-    .project-card:hover .project-image::before {
-      left: 100%;
-    }
-
-    .project-content {
-      padding: 2rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-title {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .project-description {
-      color: #888;
-      margin-bottom: 1.5rem;
-      flex-grow: 1;
-    }
-
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .tech-tag {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.4rem 0.8rem;
-      background: rgba(0, 102, 255, 0.1);
-      color: #0066ff;
-      border: 1px solid rgba(0, 102, 255, 0.3);
-      transition: all 0.2s;
-    }
-
-    .tech-tag:hover {
-      background: rgba(0, 102, 255, 0.2);
-      border-color: #0066ff;
-    }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #0066ff;
-      font-weight: 600;
-      text-decoration: none;
-      transition: gap 0.3s;
-    }
-
-    .project-link:hover {
-      gap: 1rem;
-    }
-
-    /* Experience Cards */
-    .exp-card {
-      background: #0a0a0a;
-      border-left: 3px solid #0066ff;
-      padding: 2.5rem;
-      margin-bottom: 2rem;
-      transition: all 0.3s;
-    }
-
-    .exp-card:hover {
-      background: #111;
-      padding-left: 3rem;
-    }
-
-    .exp-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .exp-company {
-      color: #0066ff;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
-
-    .exp-date {
-      color: #666;
-      font-size: 0.875rem;
-      font-family: 'JetBrains Mono', monospace;
-      margin-bottom: 1rem;
-    }
-
-    .exp-description {
-      color: #aaa;
-      line-height: 1.8;
-    }
-
-    .exp-description li {
-      margin-bottom: 0.5rem;
-      padding-left: 1rem;
-    }
-
-    /* Skills Section */
-    .skill-category {
-      margin-bottom: 3rem;
-    }
-
-    .skill-category-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .skill-item {
-      padding: 1rem 1.5rem;
-      background: #0a0a0a;
-      border: 1px solid #1a1a1a;
-      font-weight: 500;
-      transition: all 0.3s;
-    }
-
-    .skill-item:hover {
-      background: #111;
-      border-color: #0066ff;
-      transform: translateY(-2px);
-    }
-
-    /* Links */
-    .link {
-      color: #fff;
-      text-decoration: none;
-      position: relative;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #0066ff;
-      transition: width 0.3s;
-    }
-
-    .link:hover {
-      color: #0066ff;
-    }
-
-    .link:hover::after {
-      width: 100%;
-    }
-
-    /* Nav */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 2rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      background: rgba(0, 0, 0, 0.8);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-logo {
-      font-weight: 900;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 3rem;
-      font-size: 0.9rem;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid #1a1a1a;
-      padding: 4rem;
-      text-align: center;
-      color: #666;
-    }
-
-    /* Contact Section */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .contact-item {
-      padding: 2rem;
-      background: #0a0a0a;
-      border: 1px solid #1a1a1a;
-      transition: all 0.3s;
-      text-align: center;
-    }
-
-    .contact-item:hover {
-      border-color: #0066ff;
-      transform: translateY(-4px);
-    }
-
-    .contact-label {
-      font-size: 0.875rem;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-value {
-      color: #0066ff;
-      font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-      nav {
-        padding: 1.5rem 1.5rem;
-      }
-      
-      .nav-links {
-        display: none;
-      }
-      
-      .section-title {
-        font-size: 2.5rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-logo">AYMAN OUGRI</div>
-    <div class="nav-links">
-      <a href="#work" class="link">Work</a>
-      <a href="#experience" class="link">Experience</a>
-      <a href="#skills" class="link">Skills</a>
-      <a href="#contact" class="link">Contact</a>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero px-6 md:px-16 lg:px-24">
-    <div class="max-w-7xl w-full">
-      <div class="reveal">
-        <h1 class="hero-title">
-          Software<br>Engineer
-        </h1>
-        <p class="hero-subtitle">
-          Building high-performance systems & web applications
-        </p>
-        <div class="flex flex-wrap gap-8 text-lg">
-          <a href="#work" class="link">View Work ↓</a>
-          <a href="mailto:waougri@gmail.com" class="link">waougri@gmail.com</a>
-          <a href="https://github.com/waougri" class="link">GitHub</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Work Section -->
-  <section id="work" class="px-6 md:px-16 lg:px-24 py-32">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="section-title reveal">Selected Work</h2>
-      
-      <div class="grid md:grid-cols-2 gap-8">
-        
-        <!-- Crown Point Consulting -->
-        <div class="project-card reveal">
-          <div class="project-image" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
-            <span style="font-size: 3rem;">CPC</span>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Crown Point Consulting</h3>
-            <p class="project-description">
-              Full corporate website with custom design system, internal tools, and PWA functionality. Built with modern web standards featuring HTTP/2, CDN optimization, and responsive design.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">Tailwind CSS</span>
-              <span class="tech-tag">Alpine.js</span>
-              <span class="tech-tag">Netlify</span>
-              <span class="tech-tag">PWA</span>
-              <span class="tech-tag">HTTP/2</span>
-            </div>
-            <a href="https://crownpointconsult.com/" class="project-link" target="_blank">
-              View Live Site →
-            </a>
-          </div>
-        </div>
-
-        <!-- HTTPxx -->
-        <div class="project-card reveal">
-          <div class="project-image" style="background: linear-gradient(135deg, #f34b7d 0%, #ff6b9d 100%);">
-            <span>HTTP</span>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">HTTPxx</h3>
-            <p class="project-description">
-              High-performance HTTP/1.1 web server in C++ with multi-threading support. Handles 15,000 RPS with optimized memory management, achieving 35% throughput improvement.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">C++</span>
-              <span class="tech-tag">HTTP/1.1</span>
-              <span class="tech-tag">Multi-threading</span>
-              <span class="tech-tag">Performance</span>
-            </div>
-            <a href="https://github.com/waougri/httpxx" class="project-link">
-              View on GitHub →
-            </a>
-          </div>
-        </div>
-
-        <!-- Lexia -->
-        <div class="project-card reveal">
-          <div class="project-image" style="background: linear-gradient(135deg, #178600 0%, #5ac946 100%);">
-            <span>AI</span>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Lexia</h3>
-            <p class="project-description">
-              AI-powered document analysis chatbot integrating large language models for natural language processing. Enables interactive document querying with advanced NLP capabilities.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">C#</span>
-              <span class="tech-tag">AI/LLM</span>
-              <span class="tech-tag">NLP</span>
-              <span class="tech-tag">Document Analysis</span>
-            </div>
-            <a href="https://github.com/waougri/lexia" class="project-link">
-              View on GitHub →
-            </a>
-          </div>
-        </div>
-
-        <!-- Giftint -->
-        <div class="project-card reveal">
-          <div class="project-image" style="background: linear-gradient(135deg, #dea584 0%, #f5c7b0 100%);">
-            <span>GIF</span>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Giftint</h3>
-            <p class="project-description">
-              Command-line tool in Rust for transforming color palettes of animated GIFs. Implements advanced color quantization algorithms and intelligent palette mapping.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">Rust</span>
-              <span class="tech-tag">CLI</span>
-              <span class="tech-tag">Image Processing</span>
-              <span class="tech-tag">Algorithms</span>
-            </div>
-            <a href="https://github.com/waougri/giftint" class="project-link">
-              View on GitHub →
-            </a>
-          </div>
-        </div>
-
-        <!-- Graphxx -->
-        <div class="project-card reveal">
-          <div class="project-image" style="background: linear-gradient(135deg, #563d7c 0%, #8b5cf6 100%);">
-            <span>Σ</span>
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Graphxx</h3>
-            <p class="project-description">
-              Mathematical function visualizer using SFML for real-time rendering of complex functions. Optimized computation achieving 40% performance improvement.
-            </p>
-            <div class="tech-stack">
-              <span class="tech-tag">C++</span>
-              <span class="tech-tag">SFML</span>
-              <span class="tech-tag">Math Visualization</span>
-              <span class="tech-tag">Real-time</span>
-            </div>
-            <a href="https://github.com/waougri/Graphxx" class="project-link">
-              View on GitHub →
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <section id="experience" class="px-6 md:px-16 lg:px-24 py-32 bg-black">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="section-title reveal">Experience</h2>
-      
-      <div class="reveal">
-        <div class="exp-card">
-          <h3 class="exp-title">Lead Freelance Software Engineer</h3>
-          <div class="exp-company">Starlith</div>
-          <div class="exp-date">AUG 2023 — PRESENT</div>
-          <ul class="exp-description">
-            <li>Deliver full-stack software solutions, system architecture, and custom application development</li>
-            <li>Design and maintain scalable web applications, internal tools, dashboards, and backend systems</li>
-            <li>Build core business logic, APIs, data pipelines using C++, Rust, C#, Python, TypeScript, and Java</li>
-            <li>Apply computer science fundamentals and algorithms to solve real-world engineering problems</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="reveal">
-        <div class="exp-card">
-          <h3 class="exp-title">Python & FastAPI Backend Intern</h3>
-          <div class="exp-company">AXENTRA OS</div>
-          <div class="exp-date">OCT 2024 — NOV 2025</div>
-          <ul class="exp-description">
-            <li>Developed and maintained RESTful APIs using FastAPI and Python for backend services</li>
-            <li>Implemented real-time API integration with Shiprocket, handling webhooks for live shipment events</li>
-            <li>Built secure webhook endpoints with request validation, error handling, and reliable event processing</li>
-            <li>Worked with PostgreSQL and MySQL databases including schema design, queries, and optimization</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="reveal">
-        <div class="exp-card">
-          <h3 class="exp-title">Backend Developer Intern</h3>
-          <div class="exp-company">VNB-IT</div>
-          <div class="exp-date">SEP 2025 — OCT 2025</div>
-          <ul class="exp-description">
-            <li>Designed and maintained secure RESTful APIs using Node.js and Express.js</li>
-            <li>Optimized PostgreSQL databases with query optimization and transaction handling</li>
-            <li>Implemented JWT-based authentication, role-based access control, and security best practices</li>
-            <li>Wrote comprehensive unit and integration tests using Jest/Mocha to ensure reliability</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="px-6 md:px-16 lg:px-24 py-32">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="section-title reveal">Technical Skills</h2>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-        
-        <div class="skill-category reveal">
-          <h3 class="skill-category-title">Systems Programming</h3>
-          <div class="skills-grid">
-            <div class="skill-item">C++</div>
-            <div class="skill-item">Rust</div>
-            <div class="skill-item">Multi-threading</div>
-            <div class="skill-item">Performance Optimization</div>
-            <div class="skill-item">Memory Management</div>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <h3 class="skill-category-title">Backend Development</h3>
-          <div class="skills-grid">
-            <div class="skill-item">Python</div>
-            <div class="skill-item">FastAPI</div>
-            <div class="skill-item">Node.js</div>
-            <div class="skill-item">Express.js</div>
-            <div class="skill-item">RESTful APIs</div>
-            <div class="skill-item">Spring Boot</div>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <h3 class="skill-category-title">Databases</h3>
-          <div class="skills-grid">
-            <div class="skill-item">PostgreSQL</div>
-            <div class="skill-item">MySQL</div>
-            <div class="skill-item">TypeORM</div>
-            <div class="skill-item">Sequelize</div>
-            <div class="skill-item">Query Optimization</div>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <h3 class="skill-category-title">Web Technologies</h3>
-          <div class="skills-grid">
-            <div class="skill-item">TypeScript</div>
-            <div class="skill-item">JavaScript</div>
-            <div class="skill-item">Java</div>
-            <div class="skill-item">Kotlin</div>
-            <div class="skill-item">C#</div>
-            <div class="skill-item">Tailwind CSS</div>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <h3 class="skill-category-title">Security & DevOps</h3>
-          <div class="skills-grid">
-            <div class="skill-item">JWT Authentication</div>
-            <div class="skill-item">RBAC</div>
-            <div class="skill-item">Git</div>
-            <div class="skill-item">CI/CD</div>
-            <div class="skill-item">Linux</div>
-            <div class="skill-item">Docker</div>
-          </div>
-        </div>
-
-        <div class="skill-category reveal">
-          <h3 class="skill-category-title">AI/ML</h3>
-          <div class="skills-grid">
-            <div class="skill-item">LLM Integration</div>
-            <div class="skill-item">NLP</div>
-            <div class="skill-item">Document Analysis</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="px-6 md:px-16 lg:px-24 py-32 bg-black">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="section-title reveal">Get In Touch</h2>
-      
-      <div class="contact-grid reveal">
-        <div class="contact-item">
-          <div class="contact-label">Email</div>
-          <a href="mailto:waougri@gmail.com" class="contact-value">waougri@gmail.com</a>
-        </div>
-        
-        <div class="contact-item">
-          <div class="contact-label">Phone</div>
-          <a href="tel:5616981882" class="contact-value">+1 (561) 698-1882</a>
-        </div>
-        
-        <div class="contact-item">
-          <div class="contact-label">GitHub</div>
-          <a href="https://github.com/waougri" class="contact-value" target="_blank">waougri</a>
-        </div>
-        
-        <div class="contact-item">
-          <div class="contact-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/aaougri" class="contact-value" target="_blank">aaougri</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Ayman Ougri. All rights reserved.</p>
-    <p style="margin-top: 0.5rem; font-size: 0.875rem;">Bachelor's in Computer Science, University of the People (2022-2025)</p>
-  </footer>
-
-  <script>
-    // Cursor glow effect
-    const cursorGlow = document.getElementById('cursorGlow');
-    let mouseX = 0, mouseY = 0;
-    let glowX = 0, glowY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animateGlow() {
-      glowX += (mouseX - glowX) * 0.1;
-      glowY += (mouseY - glowY) * 0.1;
-      cursorGlow.style.left = glowX + 'px';
-      cursorGlow.style.top = glowY + 'px';
-      requestAnimationFrame(animateGlow);
-    }
-    animateGlow();
-
-    // Scroll reveal animation
-    const revealElements = document.querySelectorAll('.reveal');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO's Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    const revealOnScroll = () => {
-      revealElements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: "hsl(240 3.7% 15.9%)",
+                        background: "#0f0711", /* Deepest foundation shade */
+                        foreground: "hsl(0 0% 98%)",
+                        primary: "#b3346b",    /* Foundation Magenta */
+                        secondary: "#2c6385",  /* Foundation Blue */
+                        accent: "#3b1340",     /* Foundation Purple */
+                        muted: {
+                            DEFAULT: "hsl(240 3.7% 15.9%)",
+                            foreground: "#94a3b8",
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: linear-gradient(145deg, rgba(59, 19, 64, 0.2) 0%, rgba(15, 7, 17, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(179, 52, 107, 0.15);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #b3346b, #2c6385);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        ::selection { background: #b3346b; color: white; }
+    </style>
+</head>
+<body class="bg-background text-foreground antialiased font-sans">
+
+    <nav class="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
+        <div class="container mx-auto flex h-16 items-center justify-between px-6">
+            <span class="font-bold tracking-tighter text-2xl">AO<span class="text-primary">.</span></span>
+            <div class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+                <a href="#experience" class="hover:text-primary transition-colors uppercase tracking-widest">Experience</a>
+                <a href="#projects" class="hover:text-primary transition-colors uppercase tracking-widest">Projects</a>
+                <a href="#skills" class="hover:text-primary transition-colors uppercase tracking-widest">Stack</a>
+            </div>
+            <a href="mailto:waougri@gmail.com" class="bg-foreground text-background px-4 py-2 rounded text-xs font-bold uppercase tracking-tighter hover:bg-primary hover:text-white transition-all">Get in Touch</a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6">
         
-        if (elementTop < windowHeight - 100) {
-          el.classList.add('active');
-        }
-      });
-    };
+        <section class="min-height-[90vh] flex flex-col justify-center items-center text-center pt-40 pb-32">
+            <div data-aos="fade-down" class="mb-6 px-4 py-1 border border-secondary/30 bg-secondary/10 rounded-full text-secondary text-xs font-mono">
+                &lt; Founder & Lead Engineer @ Starlith Labs /&gt;
+            </div>
+            <h1 data-aos="fade-up" class="text-6xl md:text-8xl font-bold tracking-tighter mb-6 text-gradient">
+                Ayman Ougri
+            </h1>
+            <p data-aos="fade-up" data-aos-delay="100" class="max-w-2xl text-muted-foreground text-lg md:text-xl leading-relaxed">
+                Building high-performance systems and scalable software infrastructure. 
+                Expertise in <span class="text-foreground">C++</span>, <span class="text-foreground">Rust</span>, and <span class="text-foreground">Distributed Architecture</span>.
+            </p>
+            <div data-aos="fade-up" data-aos-delay="200" class="flex gap-4 mt-10">
+                <a href="#projects" class="bg-primary px-6 py-3 rounded-md font-bold text-sm shadow-lg shadow-primary/20">VIEW WORK</a>
+                <a href="https://github.com/waougri" target="_blank" class="border border-border px-6 py-3 rounded-md font-bold text-sm hover:bg-muted transition-all">GITHUB</a>
+            </div>
+        </section>
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+        <section id="experience" class="py-24 border-t border-border">
+            <h2 class="text-sm font-mono text-primary uppercase tracking-[0.3em] mb-12">Experience</h2>
+            <div class="space-y-12">
+                
+                <div data-aos="fade-up" class="glass-card p-8 rounded-2xl relative overflow-hidden">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-3xl font-bold">Starlith Labs</h3>
+                            <p class="text-secondary text-lg">CEO & Lead Software Engineer</p>
+                        </div>
+                        <span class="font-mono text-muted-foreground text-sm mt-2 md:mt-0">Aug 2024 — Present</span>
+                    </div>
+                    <p class="text-muted-foreground mb-6">Founder and lead developer delivering full-stack solutions and custom application development. Architecting scalable systems using C++, Rust, and Python.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-accent/30 rounded text-xs font-mono">Software Infrastructure</span>
+                        <span class="px-3 py-1 bg-accent/30 rounded text-xs font-mono">System Architecture</span>
+                        <span class="px-3 py-1 bg-accent/30 rounded text-xs font-mono">Performance Tuning</span>
+                    </div>
+                </div>
 
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
+                <div data-aos="fade-up" class="glass-card p-8 rounded-2xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold">Axentra OS</h3>
+                            <p class="text-secondary">Python & FastAPI Back-End Intern</p>
+                        </div>
+                        <span class="font-mono text-muted-foreground text-sm">Oct 2024 — Nov 2025</span>
+                    </div>
+                    <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• Implemented real-time API integration with Shiprocket handling live webhook processing.</li>
+                        <li>• Built secure FastAPI endpoints with request validation and reliable event processing.</li>
+                        <li>• Collaborated on Agile feature development and unit/integration testing.</li>
+                    </ul>
+                </div>
+
+                <div data-aos="fade-up" class="glass-card p-8 rounded-2xl">
+                    <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold">VNB-IT</h3>
+                            <p class="text-secondary">Backend Developer Intern</p>
+                        </div>
+                        <span class="font-mono text-muted-foreground text-sm">Sep 2025 — Oct 2025</span>
+                    </div>
+                    <ul class="text-muted-foreground space-y-2 text-sm">
+                        <li>• Optimized PostgreSQL databases with transaction handling and complex query tuning.</li>
+                        <li>• Managed data layers using TypeORM/Sequelize for Node.js/Express environments.</li>
+                        <li>• Secured API endpoints with JWT-based authentication and RBAC.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects" class="py-24 border-t border-border">
+            <h2 class="text-sm font-mono text-primary uppercase tracking-[0.3em] mb-12">Featured Systems</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div data-aos="zoom-in" class="glass-card p-8 rounded-2xl group">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fa-solid fa-palette text-3xl text-primary"></i>
+                        <a href="https://github.com/waougri/giftint" target="_blank" class="text-muted-foreground hover:text-white transition-colors"><i class="fa-brands fa-github text-2xl"></i></a>
+                    </div>
+                    <h3 class="text-2xl font-bold group-hover:text-primary transition-colors">giftint</h3>
+                    <p class="text-muted-foreground mt-2 mb-6">A high-performance CLI tool written in Rust for GIF recoloring. Implements advanced color quantization and palette mapping algorithms.</p>
+                    <div class="flex gap-3">
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">RUST</span>
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">IMAGE PROCESSING</span>
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">ALGORITHMS</span>
+                    </div>
+                </div>
+
+                <div data-aos="zoom-in" data-aos-delay="100" class="glass-card p-8 rounded-2xl group">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fa-solid fa-server text-3xl text-secondary"></i>
+                        <a href="https://github.com/waougri/httpxx" target="_blank" class="text-muted-foreground hover:text-white transition-colors"><i class="fa-brands fa-github text-2xl"></i></a>
+                    </div>
+                    <h3 class="text-2xl font-bold group-hover:text-secondary transition-colors">HTTPxx</h3>
+                    <p class="text-muted-foreground mt-2 mb-6">Multi-threaded C++ web server handling 15k RPS. Optimized memory management for 35% throughput increase.</p>
+                    <div class="flex gap-3">
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">C++</span>
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">NETWORKING</span>
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">PERFORMANCE</span>
+                    </div>
+                </div>
+
+                <div data-aos="zoom-in" class="glass-card p-8 rounded-2xl group md:col-span-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <i class="fa-solid fa-bolt text-3xl text-primary"></i>
+                        <a href="https://crownpointconsult.com/" target="_blank" class="text-muted-foreground hover:text-white transition-colors"><i class="fa-solid fa-link text-2xl"></i></a>
+                    </div>
+                    <h3 class="text-2xl font-bold group-hover:text-primary transition-colors">Crown Point Consulting</h3>
+                    <p class="text-muted-foreground mt-2 mb-6">Corporate platform and internal automation tools. Focused on HTTP/2 optimization, PWA functionality, and sub-second load times using Netlify and Tailwind.</p>
+                    <div class="flex gap-3">
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">TAILWIND</span>
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">AUTOMATION</span>
+                        <span class="text-[10px] font-bold px-2 py-1 border border-border rounded">PWA</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="skills" class="py-24 border-t border-border">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div>
+                    <h2 class="text-sm font-mono text-primary uppercase tracking-[0.3em] mb-6">Low Level</h2>
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="flex justify-between border-b border-border pb-2"><span>C++20</span><span class="text-primary">Advanced</span></div>
+                        <div class="flex justify-between border-b border-border pb-2"><span>Rust</span><span class="text-primary">Intermediate</span></div>
+                        <div class="flex justify-between border-b border-border pb-2"><span>Multithreading</span><span class="text-primary">Expert</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-sm font-mono text-secondary uppercase tracking-[0.3em] mb-6">Distributed</h2>
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="flex justify-between border-b border-border pb-2"><span>Python/FastAPI</span><span class="text-secondary">Advanced</span></div>
+                        <div class="flex justify-between border-b border-border pb-2"><span>Node.js</span><span class="text-secondary">Advanced</span></div>
+                        <div class="flex justify-between border-b border-border pb-2"><span>PostgreSQL</span><span class="text-secondary">Expert</span></div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-sm font-mono text-primary uppercase tracking-[0.3em] mb-6">Infrastructure</h2>
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="flex justify-between border-b border-border pb-2"><span>Docker/Linux</span><span class="text-primary">Advanced</span></div>
+                        <div class="flex justify-between border-b border-border pb-2"><span>CI/CD</span><span class="text-primary">Advanced</span></div>
+                        <div class="flex justify-between border-b border-border pb-2"><span>Network Sec</span><span class="text-primary">Certified</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-20 border-t border-border bg-black/20">
+        <div class="container mx-auto px-6 flex flex-col md:row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <p class="font-bold text-xl">Ayman Ougri</p>
+                <p class="text-muted-foreground text-sm">Computer Science @ UoPeople (2025)</p>
+            </div>
+            <div class="flex gap-6 text-2xl">
+                <a href="https://github.com/waougri" class="hover:text-primary transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:waougri@gmail.com" class="hover:text-primary transition-colors"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p class="text-[10px] uppercase tracking-widest text-muted-foreground">© 2026 Starlith Labs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, offset: 50 });
+    </script>
 </body>
 </html>
